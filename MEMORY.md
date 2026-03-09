@@ -24,4 +24,18 @@
 - **Human-in-the-Loop (HITL) como Estado:** En LangGraph, las interrupciones para pedir permiso al humano se modelan pausando el grafo y guardando el estado en una base de datos (Postgres/SQLite), lo que permite que el sistema se reanude días después sin perder contexto.
 
 ---
+## 📅 Registro de Sesiones
+
+### Sesión 1: 9 de Marzo de 2026
+- **Logros:** 
+  - Inicialización del proyecto y repositorio Git (local y remoto).
+  - Creación del `ROADMAP.md` con las 4 fases fundamentales (Orquestación, Agentes, SDLC, Gobierno).
+  - Creación del `MEMORY.md` para persistir arquitecturas y decisiones.
+  - Creación del primer Skill/Workflow (`github_roadmap_sync.md`) para sincronizar el roadmap local con los Issues de GitHub.
+  - Ejecución exitosa del workflow: Se crearon 13 Issues y 4 etiquetas semánticas en el repositorio público.
+- **Próximos pasos (Para mañana):**
+  - Iniciar ejecución de la Fase 1: Setup del entorno base y primer acercamiento al código con **LangGraph** (o framework seleccionado).
+  - Definir estructura de carpetas (ej. `/agents`, `/workflows`, `/core`, etc.).
+
+---
 *Nota: Este archivo crecerá orgánicamente. Cada vez que tomemos una decisión importante o aprendamos algo nuevo sobre orquestación de LLMs, lo registraré aquí.*
