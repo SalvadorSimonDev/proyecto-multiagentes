@@ -1,8 +1,8 @@
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
 from core.state import AgentState
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+llm = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0)
 
 def security_agent(state: AgentState):
     """

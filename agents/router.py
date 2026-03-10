@@ -1,5 +1,3 @@
-from langchain_core.messages import HumanMessage, AIMessage
-from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from core.state import AgentState
 from agents.tools import read_file, write_file
@@ -7,9 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Instanciar el modelo LLM principal (Router)
-# Se pueden usar varios modelos dependiendo del rol (ej: Claude para código, OpenAI para routing rápido)
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+# Instanciar el modelo LLM principal (Router) - Cambiado a Anthropic
+llm = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0)
 
 from pydantic import BaseModel, Field
 
