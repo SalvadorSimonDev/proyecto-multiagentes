@@ -15,7 +15,8 @@ class RouteDecision(BaseModel):
         description="Si el usuario pide limpieza/arquitectura, devuelve 'clean_code'. "
                     "Si pide seguridad/vulnerabilidades, devuelve 'security'. "
                     "Si pide crear o ejecutar tests, devuelve 'testing'. "
-                    "Para cualquier otra consulta general, devuelve 'FIN'."
+                    "Para saludos, preguntas generales o 'quién eres', devuelve 'chat'. "
+                    "Si no se requiere ninguna acción adicional, devuelve 'END'."
     )
 
 llm_router = llm.with_structured_output(RouteDecision)
@@ -27,11 +28,11 @@ def router_agent(state: AgentState):
     messages = state["messages"]
     system_message = {
         "role": "system",
-        "content": "Eres el enrutador semántico del proyecto multiagentes. Tu única función es leer el mensaje del usuario y decidir qué agente especializado debe atenderlo."
+        "content": "Eres el enrutador semántico del proyecto multiagentes. Tu única función es leer el mensaje del usuario y decidir qué agente especializado debe atenderlo. No respondas al usuario, solo decide el siguiente nodo."
     }
     
     llm_messages = [system_message] + list(messages)
     decision = llm_router.invoke(llm_messages)
     
-    # Registramos la decisión en el estado para que el grafo sepa a dónde ir
+    # Registramos la decisión en el estado
     return {"current_agent": decision.next_node}
