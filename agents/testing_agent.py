@@ -1,6 +1,6 @@
 import os
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_anthropic import ChatAnthropic
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.tools import tool
 from core.state import AgentState
 
@@ -43,7 +43,7 @@ def execute_python_code(code: str) -> str:
         return f"Excepción fatal al conectar con sandbox: {str(e)}"
 
 
-llm = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0).bind_tools([execute_python_code])
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0).bind_tools([execute_python_code])
 
 def testing_agent(state: AgentState):
     """

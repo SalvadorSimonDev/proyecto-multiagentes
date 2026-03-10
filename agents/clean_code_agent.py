@@ -1,8 +1,8 @@
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_anthropic import ChatAnthropic
+from langchain_google_genai import ChatGoogleGenerativeAI
 from core.state import AgentState
 
-llm = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0)
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)
 
 def clean_code_agent(state: AgentState):
     """

@@ -1,12 +1,12 @@
-from langchain_anthropic import ChatAnthropic
+from langchain_google_genai import ChatGoogleGenerativeAI
 from core.state import AgentState
 from agents.tools import read_file, write_file
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Instanciar el modelo LLM principal (Router) - Cambiado a Anthropic
-llm = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0)
+# Instanciar el modelo LLM principal (Router) - Cambiado a Google Gemini
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)
 
 from pydantic import BaseModel, Field
 
