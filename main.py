@@ -4,9 +4,9 @@ from core.orchestrator import app
 
 def main():
     # Asegurarnos de que el usuario haya configurado su API key
-    if not os.getenv("OPENAI_API_KEY") and not os.getenv("ANTHROPIC_API_KEY"):
-        print("⚠️ Advertencia: No se encontraron API keys de OpenAI o Anthropic en las variables de entorno.")
-        print("Por favor, crea un archivo .env en la raíz del proyecto y añade tu API key.")
+    if not os.getenv("GOOGLE_API_KEY"):
+        print("⚠️ Advertencia: No se encontró GOOGLE_API_KEY en las variables de entorno.")
+        print("Jarvis necesita a Gemini para funcionar. Por favor, añade tu API key en el archivo .env.")
         return
 
     print("🤖 Iniciando Orquestador Multiagentes...")

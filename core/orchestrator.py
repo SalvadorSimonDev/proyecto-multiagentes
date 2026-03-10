@@ -1,5 +1,6 @@
 from langgraph.graph import StateGraph, START, END
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.sqlite import SqliteSaver
+import sqlite3
 from core.state import AgentState
 from agents.router import router_agent
 from agents.chat_agent import chat_agent
@@ -7,8 +8,10 @@ from agents.clean_code_agent import clean_code_agent
 from agents.security_agent import security_agent
 from agents.testing_agent import testing_agent
 
-# Configurar el Checkpointer en memoria (después migraremos a SQLite/Postgres)
-memory = MemorySaver()
+# Configurar el Checkpointer con SQLite para persistencia real
+# Usamos un archivo local 'checkpoints.db'
+conn = sqlite3.connect("checkpoints.db", check_same_thread=False)
+memory = SqliteSaver(conn)
 
 # Inicializar el grafo con el esquema de estado
 workflow = StateGraph(AgentState)
