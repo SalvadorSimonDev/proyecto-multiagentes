@@ -1,0 +1,29 @@
+# Entornos Virtuales
+.venv/
+venv/
+ENV/
+env/
+venv.bak/
+
+# Variables de Entorno (Secretos)
+.env
+.env.local
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest / Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# LangGraph / SQLite Checks (si se usa en el futuro)
+*.db
+*.sqlite3
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
