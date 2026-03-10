@@ -43,7 +43,7 @@ def execute_python_code(code: str) -> str:
         return f"Excepción fatal al conectar con sandbox: {str(e)}"
 
 
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0).bind_tools([execute_python_code])
+llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0).bind_tools([execute_python_code])
 
 def testing_agent(state: AgentState):
     """
