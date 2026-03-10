@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Instanciar el modelo LLM principal (Router) - Cambiado a Google Gemini
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0)
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", temperature=0)
 
 from pydantic import BaseModel, Field
 
