@@ -11,25 +11,30 @@ load_dotenv()
 # Se pueden usar varios modelos dependiendo del rol (ej: Claude para código, OpenAI para routing rápido)
 llm = ChatOpenAI(model="gpt-4o", temperature=0)
 
-# Vincular las herramientas al LLM
-tools = [read_file, write_file]
-llm_with_tools = llm.bind_tools(tools)
+from pydantic import BaseModel, Field
+
+class RouteDecision(BaseModel):
+    next_node: str = Field(
+        description="Si el usuario pide limpieza/arquitectura, devuelve 'clean_code'. "
+                    "Si pide seguridad/vulnerabilidades, devuelve 'security'. "
+                    "Si pide crear o ejecutar tests, devuelve 'testing'. "
+                    "Para cualquier otra consulta general, devuelve 'FIN'."
+    )
+
+llm_router = llm.with_structured_output(RouteDecision)
 
 def router_agent(state: AgentState):
     """
-    Agente principal que decide el flujo inicial y usa herramientas.
+    Agente principal que clasifica la intención del usuario y decide el ruteo.
     """
     messages = state["messages"]
     system_message = {
         "role": "system",
-        "content": "Eres el Orquestador principal del proyecto multiagentes. Tu objetivo es entender el pedido del usuario y usar tus herramientas para analizar el repositorio."
+        "content": "Eres el enrutador semántico del proyecto multiagentes. Tu única función es leer el mensaje del usuario y decidir qué agente especializado debe atenderlo."
     }
     
-    # Preparar mensajes para el LLM
     llm_messages = [system_message] + list(messages)
+    decision = llm_router.invoke(llm_messages)
     
-    # Invocar al modelo
-    response = llm_with_tools.invoke(llm_messages)
-    
-    # Devolver el estado actualizado
-    return {"messages": [response], "current_agent": "router"}
+    # Registramos la decisión en el estado para que el grafo sepa a dónde ir
+    return {"current_agent": decision.next_node}
